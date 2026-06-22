@@ -59,7 +59,7 @@ class MainRecyclerAdapter(
 
             //Name address
             holder.itemMainBinding.tvName.text = profile.remarks
-            holder.itemMainBinding.tvStatistics.text = getAddress(profile)
+            holder.itemMainBinding.tvStatistics.text = "••••••"
             holder.itemMainBinding.tvType.text = getProtocolDescription(profile)
 
             //TestResult

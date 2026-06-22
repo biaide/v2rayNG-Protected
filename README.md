@@ -112,7 +112,7 @@ Result:
 
 ---
 
-### 3. Remove Backup & Restore from the navigation drawer
+### 3. Remove Backup & Restore from the Navigation Drawer
 
 File:
 
@@ -120,23 +120,30 @@ File:
 V2rayNG/app/src/main/res/menu/menu_drawer.xml
 ```
 
-Delete this item:
+Remove the `backup_restore` menu item.
 
-```xml
-<item
-    android:id="@+id/backup_restore"
-    android:icon="@drawable/ic_restore_24dp"
-    android:title="@string/title_configuration_backup_restore" />
+Also remove the matching navigation handler from:
+
+```text
+V2rayNG/app/src/main/java/com/v2ray/ang/ui/MainActivity.kt
+```
+
+Remove:
+
+```kotlin
+R.id.backup_restore ->
+    requestActivityLauncher.launch(Intent(this, BackupActivity::class.java))
 ```
 
 Result:
 
-* The Backup & Restore navigation item is hidden.
-* WebDAV backup and restore are no longer reachable from the normal app menu.
+* Backup & Restore is not visible in the normal navigation drawer.
+* WebDAV backup and restore are not reachable through the normal app UI.
+* `BackupActivity` remains in the source code but has no normal GUI entry point.
 
 ---
 
-### 4. Remove Export All from the main menu
+### 4. Remove Export All from the Main Menu
 
 File:
 
@@ -144,35 +151,33 @@ File:
 V2rayNG/app/src/main/res/menu/menu_main.xml
 ```
 
-Delete this item:
+Remove the `export_all` menu item.
 
-```xml
-<item
-    android:id="@+id/export_all"
-    android:icon="@drawable/ic_share_24dp"
-    android:title="@string/title_export_all"
-    app:showAsAction="never" />
+Also remove the matching main-menu handler from:
+
+```text
+V2rayNG/app/src/main/java/com/v2ray/ang/ui/MainActivity.kt
+```
+
+Remove:
+
+```kotlin
+R.id.export_all -> {
+    exportAll()
+    true
+}
 ```
 
 Result:
 
-* The Export All menu item is hidden.
-* Users cannot export all profiles through the normal main-menu action.
+* Export All is not visible in the normal main menu.
+* Users cannot export all profiles through the normal app UI.
+* The internal `exportAll()` implementation remains in the source code but has no normal GUI entry point.
 
-## What This Fork Does Not Protect Against
+---
 
-This is a UI exposure reduction fork, not a cryptographic security product.
+### UI-Only Scope
 
-It does not prevent:
+This fork intentionally reduces exposure through normal Android UI controls.
 
-* Reading application data on a rooted device
-* Rebuilding or patching the APK
-* Runtime hooking or memory inspection
-* Deleting application data
-* Deleting profiles or damaging network settings
-
-## License
-
-This project is forked from [2dust/v2rayNG](https://github.com/2dust/v2rayNG).
-
-The original GPL-3.0 license remains applicable.
+It does not remove internal import, export, backup, or edit implementations from the source code. Those functions are simply not reachable through the normal user interface after the relevant menu items and profile action controls are removed.

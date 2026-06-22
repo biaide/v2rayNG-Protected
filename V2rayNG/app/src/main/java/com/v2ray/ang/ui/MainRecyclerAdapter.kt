@@ -85,8 +85,6 @@ class MainRecyclerAdapter(
 
             //layout
             if (doubleColumnDisplay) {
-                holder.itemMainBinding.layoutShare.visibility = View.GONE
-                holder.itemMainBinding.layoutEdit.visibility = View.GONE
                 holder.itemMainBinding.layoutRemove.visibility = View.GONE
                 holder.itemMainBinding.layoutMore.visibility = View.VISIBLE
 

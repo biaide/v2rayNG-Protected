@@ -656,12 +656,10 @@ object AngConfigManager {
         val port = profile.serverPort
         if (server.isNullOrBlank() && port.isNullOrBlank()) return ""
 
-        val addrPart = server?.let {
-            if (it.contains(":"))
-                it.split(":").take(2).joinToString(":", postfix = ":***")
-            else
-                it.split('.').dropLast(1).joinToString(".", postfix = ".***")
-        } ?: ""
+        fun generateDescription(profile: ProfileItem): String {
+            val port = profile.serverPort?.trim().orEmpty()
+            return if (port.isBlank()) "" else "*** : $port"
+        }
 
         return "$addrPart : ${port ?: ""}"
     }

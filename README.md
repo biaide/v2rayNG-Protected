@@ -8,9 +8,8 @@ This fork reduces accidental configuration exposure in the user interface. It ke
 
 1. Test and prepare profiles on a private device.
 2. Import them into this app.
-3. Use friendly profile names such as `Hong Kong`, `Japan Backup`, or `Streaming`.
-4. Shared-device users can select, connect, test, update subscriptions, or delete profiles.
-5. When a profile must be changed, delete it and import the replacement profile.
+3. Shared-device users can select, connect, test, update subscriptions, or delete profiles.
+4. When a profile must be changed, delete it and import the replacement profile.
 
 ## Source Changes
 
